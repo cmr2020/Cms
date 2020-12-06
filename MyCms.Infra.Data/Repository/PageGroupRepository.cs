@@ -58,12 +58,14 @@ namespace MyCms.Infra.Data.Repository
 
         public List<ShowGroupsViewModel> GetListGroups()
         {
-            return _db.PageGroups.Include(g=> g.Pages).Select(g => new ShowGroupsViewModel()
+            List<ShowGroupsViewModel> listgroups;
+            listgroups= _db.PageGroups.Select(g => new ShowGroupsViewModel()
             {
                 GroupID = g.GroupID,
                 GroupTitle = g.GroupTitle,
-                PageCount = g.Pages.Count
+                PageCount = _db.Pages.Where(p=>p.GroupID==g.GroupID).Count()
             }).ToList();
+            return listgroups;
         }
 
         public void Save()
