@@ -8,6 +8,9 @@ namespace MyCms.Domain.Interfaces
     public interface IPageRepository
     {
         IEnumerable<Page> GetAllPage();
+        IEnumerable<Page> GetTopPage(int take = 4);
+        IEnumerable<Page> GetPagesInSlider();
+        IEnumerable<Page> GetLatesPage();
         Page GetPageById(int pageId);
         void InsertPage(Page page);
         void UpdatePage(Page page);

@@ -58,5 +58,20 @@ namespace MyCms.Infra.Data.Repository
         {
             return _ctx.Pages.Any(p => p.PageID == pageId);
         }
+
+        public IEnumerable<Page> GetTopPage(int take = 4)
+        {
+            return _ctx.Pages.OrderByDescending(p => p.PageVisit).Take(take).ToList();
+        }
+
+        public IEnumerable<Page> GetPagesInSlider()
+        {
+            return _ctx.Pages.Where(p => p.ShowInSlider).ToList();
+        }
+
+        public IEnumerable<Page> GetLatesPage()
+        {
+            return _ctx.Pages.OrderByDescending(p => p.CreateDate).Take(4).ToList();
+        }
     }
 }
