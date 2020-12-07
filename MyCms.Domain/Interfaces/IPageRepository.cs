@@ -11,6 +11,8 @@ namespace MyCms.Domain.Interfaces
         IEnumerable<Page> GetTopPage(int take = 4);
         IEnumerable<Page> GetPagesInSlider();
         IEnumerable<Page> GetLatesPage();
+        IEnumerable<Page> GetPagesByGroupId(int groupId);
+        IEnumerable<Page> Search(string q);
         Page GetPageById(int pageId);
         void InsertPage(Page page);
         void UpdatePage(Page page);

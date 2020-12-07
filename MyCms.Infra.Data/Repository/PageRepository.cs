@@ -73,5 +73,20 @@ namespace MyCms.Infra.Data.Repository
         {
             return _ctx.Pages.OrderByDescending(p => p.CreateDate).Take(4).ToList();
         }
+
+        public IEnumerable<Page> GetPagesByGroupId(int groupId)
+        {
+            return _ctx.Pages.Where(p => p.GroupID == groupId).ToList();
+        }
+
+        public IEnumerable<Page> Search(string q)
+        {
+            var list = _ctx.Pages.Where(p =>
+            p.PageTitle.Contains(q) || p.ShortDescription.Contains(q) || p.PageText.Contains(q) ||
+            p.PageTags.Contains(q)).ToList();
+
+
+            return list.Distinct().ToList();
+        }
     }
 }
